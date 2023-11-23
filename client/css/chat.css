@@ -15,8 +15,8 @@ body {
   place-content: center;
   height: 100vh;
   grid-template-rows: 1fr;
-  background-color: #000;
-  color: #fff;
+  background-color: #fafafa;
+  color: #000000;
 }
 
 #messages {
@@ -54,12 +54,15 @@ body {
 .me {
   border-radius: 10px 0px 10px 10px;
   background-color: #1d9bf0;
+  color: #fff;
+  box-shadow: 0 1px 0.5px rgba(11,20,26,.13);
+
 }
 
 .other {
   border-radius: 0px 10px 10px 10px;
-  background-color: #2f3336;
-  
+  background-color: #ffffff;
+  box-shadow: 0 1px 0.5px rgba(11,20,26,.13);
 }
 
 .message-content{
@@ -69,6 +72,7 @@ body {
 
 .username{
   font-weight: 600;
+  color: darkorange;
 }
 
 #chat {
@@ -84,11 +88,10 @@ body {
   display: flex;
   height: 48px;
   left: 0;
-  padding: 4px;
   position: absolute;
   right: 0;
-  background-color: #000;
-  border-top: 1px solid #2f3336;
+  background-color: #fff;
+  border-top: 1px solid #f8f8f8;
 }
 
 #input {
@@ -97,7 +100,8 @@ body {
   flex: 1;
   margin: 4px;
   padding: 0 8px;
-  background-color: #202327;
+  background-color: #e9e9e9;
+  border: none;
 }
 
 #input:focus {
