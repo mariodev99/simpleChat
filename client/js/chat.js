@@ -4,6 +4,10 @@ const usernameInLocalStorage = localStorage.getItem("username");
 const userIdInLocalStorage = localStorage.getItem("userId");
 const userColorInLocalStorage = localStorage.getItem("userColor");
 
+if (!usernameInLocalStorage) {
+  window.location.replace("/login");
+}
+
 const socket = io({
   auth: {
     username: usernameInLocalStorage,
@@ -12,9 +16,16 @@ const socket = io({
     serverOffset: 0,
   },
 });
+
 const form = document.getElementById("form");
 const input = document.getElementById("input");
 const messages = document.getElementById("messages");
+const upButton = document.getElementById("up-button");
+
+function scrollToBottom() {
+  console.log(messages.scrollTop, "que da esto");
+  messages.scrollTop = messages.scrollHeight;
+}
 
 socket.on(
   "chat message",
@@ -55,10 +66,11 @@ socket.on(
 
     socket.auth.serverOffset = serverOffset;
 
-    // If: el ultimo mensaje es mio scrollear
-    // else: si es de otro mostrar un boton para realizar un scroll
-
-    messages.scrollTop = messages.scrollHeight;
+    // Si envio un mensaje scrollea al final
+    if (username === usernameInLocalStorage) {
+      scrollToBottom();
+    }
+    // else: mostrar un boton para realizar un scroll hacia abajo
   }
 );
 
@@ -80,4 +92,16 @@ form.addEventListener("submit", (e) => {
     );
     input.value = "";
   }
+
+  upButton.classList.add("show-button");
 });
+
+messages.addEventListener("scroll", () => {
+  if (messages.scrollTop < messages.scrollHeight - 700) {
+    upButton.classList.add("show-button");
+  } else {
+    upButton.classList.remove("show-button");
+  }
+});
+
+upButton.addEventListener("click", scrollToBottom);

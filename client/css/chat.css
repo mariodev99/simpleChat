@@ -169,5 +169,32 @@ body {
   cursor: pointer;
 }
 
+.up-button-wrapper {
+  position: absolute;
+  bottom: 56px;
+  right: 3px;
+  /* display: flex;
+  justify-content: end;
+  width: 100%; */
+}
 
+#up-button {
+  border-radius: 999px;
+  padding: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px 5px 0px ;
+  background-color: #e9e9e9 ;
+  cursor: pointer;
+}
+
+#up-button.show-button {
+  opacity: 1;
+  pointer-events: all;
+}
 
