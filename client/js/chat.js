@@ -8,6 +8,7 @@ if (!usernameInLocalStorage) {
   window.location.replace("/login");
 }
 
+// Config del auth socket
 const socket = io({
   auth: {
     username: usernameInLocalStorage,
@@ -22,10 +23,10 @@ const input = document.getElementById("input");
 const messages = document.getElementById("messages");
 const upButton = document.getElementById("up-button");
 
-function scrollToBottom() {
-  console.log(messages.scrollTop, "que da esto");
-  messages.scrollTop = messages.scrollHeight;
-}
+// Conectado
+socket.on("connect", () => {
+  console.log("Conectado al servidor");
+});
 
 socket.on(
   "chat message",
@@ -74,11 +75,6 @@ socket.on(
   }
 );
 
-// Conectado
-socket.on("connect", () => {
-  console.log("Conectado al servidor");
-});
-
 // Enviar un mensaje
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -96,12 +92,18 @@ form.addEventListener("submit", (e) => {
   upButton.classList.add("show-button");
 });
 
-messages.addEventListener("scroll", () => {
+// Scroll button logic
+function showScrollButton() {
   if (messages.scrollTop < messages.scrollHeight - 700) {
     upButton.classList.add("show-button");
   } else {
     upButton.classList.remove("show-button");
   }
-});
+}
 
+function scrollToBottom() {
+  messages.scrollTop = messages.scrollHeight;
+}
+
+messages.addEventListener("scroll", showScrollButton);
 upButton.addEventListener("click", scrollToBottom);

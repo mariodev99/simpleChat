@@ -32,7 +32,7 @@ db.run(createTableQuery, (err) => {
 });
 
 // Funciones
-function addMessage(content, username, userId) {
+function addMessageInDB(content, username, userId) {
   return new Promise((resolve, reject) => {
     db.run(
       "INSERT INTO messages (content, user, userId) VALUES (?,?,?)",
@@ -80,7 +80,7 @@ io.on("connection", async (socket) => {
 
   // let lastMsgUserId;
 
-  // Recuperar los mensajes de DB
+  // Recuperar los mensajes de DB y emito los mensajes al usuario
   if (!socket.recovered) {
     try {
       const allMessages = await getAllMessages(
@@ -124,8 +124,7 @@ io.on("connection", async (socket) => {
     }
   }
 
-  // console.log("El ultimo usuario en mandar un mensaje es:", lastMsgUsername);
-
+  // guarda el mensaje en base de datos, obtengo el ultimo mensaje enviado y emito el mensaje a todos
   socket.on("chat message", (msg, username, userId) => {
     let lastIdMsg;
 
@@ -136,7 +135,7 @@ io.on("connection", async (socket) => {
     }
 
     // Guardar mensaje en base de datos
-    addMessage(msg, username, userId)
+    addMessageInDB(msg, username, userId)
       .then((lastInsertId) => {
         lastIdMsg = lastInsertId;
       })

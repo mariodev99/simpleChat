@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/global.css">
     <script type="module" src="js/login.js"></script>
     <title>Login</title>
 </head>
 <body>
-    <main>
-        <h1>Bienvenido</h1>
-
-        <form id="loginForm">
-            <input type="text" id="username"/>
-            <button id="loginButton" type="submit">Login</button>
-        </form>
+    <main class="appContainer center">
+        <div class="loginContainer">
+            <h1 id="loginTitle">Bienvenido</h1>
+            <p id="loginSubtitle"></p>
+            <form id="loginForm">
+                <input type="text" id="username"/>
+                <button id="loginPrimaryButton" type="submit">Login</button>
+            </form>
+            <div class="center">
+                <button id="loginSecondaryButton">seguir como</button>
+            </div>
+        </div>
     </main>
 </body>
 </html>
