@@ -34,7 +34,7 @@ socket.on(
     let item;
 
     // Si soy yo
-    if (username === usernameInLocalStorage) {
+    if (userId === userIdInLocalStorage) {
       item = `
         <li class="position-end">
           <div class="message-content me">

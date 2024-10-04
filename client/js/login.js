@@ -41,13 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function login() {
     const usernameInput = document.getElementById("username");
     const username = usernameInput.value.trim();
+    const userColor = getRandomColor();
+    let userId;
 
     if (username != "" && username.length < 15) {
-      const userId = generateUniqueId();
-      const userColor = getRandomColor();
+      if (!userIdInLocalStorage) {
+        userId = generateUniqueId();
+        localStorage.setItem("userId", userId);
+      }
 
       // Guardar la información
-      localStorage.setItem("userId", userId);
       localStorage.setItem("username", username);
       localStorage.setItem("userColor", userColor);
 

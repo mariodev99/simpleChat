@@ -1,0 +1,11 @@
+# Exported from Render on 2024-10-04T14:48:59Z
+services:
+- type: web
+  name: mario-chat
+  runtime: node
+  repo: https://github.com/mariodev99/simpleChat
+  plan: free
+  region: oregon
+  buildCommand: npm install
+  startCommand: npm run start
+version: "1"

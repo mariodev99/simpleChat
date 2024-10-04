@@ -15,13 +15,18 @@
 }
 
 #loginPrimaryButton {
-    background: #0cf;
+    background: #09f;
     border-radius: 999px;
     border: none;
     padding: 10px 26px;
     font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
+}
+
+#loginPrimaryButton:hover {
+    background: #0cf;
+
 }
 
 #loginSecondaryButton {
