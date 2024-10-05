@@ -26,6 +26,7 @@ body {
     width: 350px;
     height: 100%;
     position: relative;
+    padding: 0px 10px;
   }
 
 ::-webkit-scrollbar {
