@@ -3,6 +3,7 @@ import { Server } from "socket.io";
 import { createServer } from "node:http";
 import logger from "morgan";
 import sqlite3 from "sqlite3";
+import { Socket } from "socket.io-client";
 
 const app = express();
 const server = createServer(app);
@@ -69,16 +70,8 @@ let lastSentMessage = {
 
 // Socket
 io.on("connection", async (socket) => {
-  // console.log("Usuario conectado");
-
-  // socket.on("disconnect", () => {
-  //   console.log("Usuario desconectado");
-  // });
-
   let lastIndexMsg;
   let newPreviousUserMatch;
-
-  // let lastMsgUserId;
 
   // Recuperar los mensajes de DB y emito los mensajes al usuario
   if (!socket.recovered) {
@@ -90,15 +83,13 @@ io.on("connection", async (socket) => {
       lastIndexMsg = allMessages.length;
 
       lastSentMessage = {
-        content: allMessages[lastIndexMsg - 1].content,
+        // content: allMessages[lastIndexMsg - 1].content,
         userId: allMessages[lastIndexMsg - 1].userId,
       };
 
       let previousUserMatch;
 
-      // Obtengo el ultimo usuario en mandar el mensaje
-      // lastMsgUsername = allMessages[allMessages.length - 1].user;
-
+      // PreviousUserMatch sirve para mostrar o no el nombre del usuario: EJ: si un usuario manda 2 mensaje, solo muestro el nombre en el primero como whatsapp
       // Logica de previous Match para los mensajes traidos de la BD
       for (let index = 1; index < allMessages.length; index++) {
         previousUserMatch = false;
@@ -124,7 +115,7 @@ io.on("connection", async (socket) => {
     }
   }
 
-  // guarda el mensaje en base de datos, obtengo el ultimo mensaje enviado y emito el mensaje a todos
+  // guarda el mensaje en base de datos, chequeo PreviousUserMatch y emito el mensaje a todos
   socket.on("chat message", (msg, username, userId) => {
     let lastIdMsg;
 

@@ -22,12 +22,10 @@ const form = document.getElementById("form");
 const input = document.getElementById("input");
 const messages = document.getElementById("messages");
 const upButton = document.getElementById("up-button");
-
+const buttonLogin = document.getElementById("login");
 // Conectado
-socket.on("connect", () => {
-  console.log("Conectado al servidor");
-});
 
+// Receptor el mensaje
 socket.on(
   "chat message",
   (msg, serverOffset, username, userId, previousUserMatch, lastSentMessage) => {
@@ -75,6 +73,23 @@ socket.on(
   }
 );
 
+// Scroll button logic
+function showScrollButton() {
+  if (messages.scrollTop < messages.scrollHeight - 700) {
+    upButton.classList.add("show-button");
+  } else {
+    upButton.classList.remove("show-button");
+  }
+}
+
+function scrollToBottom() {
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function goToLogin() {
+  window.location.replace("/login");
+}
+
 // Enviar un mensaje
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -92,18 +107,6 @@ form.addEventListener("submit", (e) => {
   upButton.classList.add("show-button");
 });
 
-// Scroll button logic
-function showScrollButton() {
-  if (messages.scrollTop < messages.scrollHeight - 700) {
-    upButton.classList.add("show-button");
-  } else {
-    upButton.classList.remove("show-button");
-  }
-}
-
-function scrollToBottom() {
-  messages.scrollTop = messages.scrollHeight;
-}
-
 messages.addEventListener("scroll", showScrollButton);
 upButton.addEventListener("click", scrollToBottom);
+buttonLogin.addEventListener("click", goToLogin);
